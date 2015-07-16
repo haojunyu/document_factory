@@ -1,0 +1,26 @@
+%Introduction--总体介绍
+\section{总体介绍}
+\subsection{实际问题}
+\subsection{模型}
+在机器学习中,一般的解题模型都要经过模型的训练和模型的测试两个部分,其流程图如下\ref{gd:figure:model}:
+\begin{figure}[!htbp]
+	\centering
+	\includegraphics[scale=0.5]{figs/model.eps} 
+	\caption{解题模型的流程图}    	
+	\label{gd:figure:model}
+\end{figure}
+
+
+在训练和测试都用到了某个模型,我们用其参数$\Theta$来表示这个模型.其中模型选择\textcolor{red}{[Model Selection]}是为了确定模型中的参数$\Theta$的个数以及参数的含义.而训练是为了利用学习算法来将训练数据中的样本数据$X$和样本标签$Y$的映射关系转换成模型中参数,使得该模型能将训练数据中的样本数据$x$转换成样本标签$y$.
+
+
+很容易看出,影响这个模型的关键因数有两点:
+\begin{enumerate}
+\item model的选择,换句话说就是用什么样的参数$\Theta$来代表这个模型
+\item 学习算法学习这种映射关系的能力怎么样
+\end{enumerate}
+对于第一点的话,主要是通过散点图来粗略的看一下变量间的关系,然后根据一些经验来进行合理的推测.而对于第二点,就要看什么样的算法适合这个方向的数据了.
+
+
+
+\newpage

@@ -1,0 +1,79 @@
+\documentclass[10pt,a4paper]{article}	
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{CJK}													% 支持中文
+\usepackage{listings}											% 支持代码显示
+\usepackage{color}												% 给文字,表格和图形上色(68种)
+\usepackage{xcolor}												% color包的扩展
+\usepackage{graphicx}											% 支持图片的插入
+\usepackage{subfigure}											% 支持插入子图
+\usepackage[colorlinks,citecolor = blue, linkcolor=blue,hyperindex,CJKbookmarks]{hyperref}	% 链接功能
+
+%===========================java语言代码显示设置===============================
+\lstdefinestyle{JAVA}{
+language=[AspectJ]Java,						% java语言
+basicstyle=\small,							% 小号字体
+numbers=left,								% 代码左边显行号
+keywordstyle=\color{blue},					% 关键字用蓝色显示
+numberstyle={\tiny\color{green}},			% 行号小小号,绿色	
+numbersep=5pt,								% 行号与代码的距离
+commentstyle=\small\color{red},				% 注释颜色和字号
+backgroundcolor=\color[rgb]{0.95,1.0,1.0},	% 设置背景颜色
+showspaces=false,							% 不显示空格
+showtabs=false,								% 不显示\t
+tabsize=4,									% \t的长短
+frame=shadowbox, 							% 添加外框
+framexleftmargin=5mm, 						% 外框左边的页边空白
+rulesepcolor=\color{red!20!green!20!blue!20!},	%设置阴影颜色
+breaklines=true,								% 自动断行
+morekeywords={out},
+escapeinside=``,
+extendedchars=false 							% 解决代码跨页时，章节标题，页眉等汉字不显示的问题
+}
+%========================SHELL代码显示设置=============================
+\lstdefinestyle{BASH}{
+language=bash,								% bash代码
+basicstyle=\small,							% 小号字体
+numbers=left,								% 代码左边显行号
+keywordstyle=\color{blue},					% 关键字用蓝色显示
+numberstyle={\tiny\color{green}},			% 行号小小号,绿色	
+numbersep=5pt,								% 行号与代码的距离
+commentstyle=\small\color{red},				% 注释颜色和字号
+backgroundcolor=\color[rgb]{1.0,0.95,1.0},	% 设置背景颜色
+showspaces=false,							% 不显示空格
+showtabs=false,								% 不显示\t
+tabsize=4,									% \t的长短
+frame=shadowbox, 							% 添加外框
+framexleftmargin=5mm, 						% 外框左边的页边空白
+rulesepcolor=\color{red!20!green!20!blue!20!},	%设置阴影颜色
+breaklines=true,								% 自动断行
+escapeinside=``,
+extendedchars=false, 						% 解决代码跨页时，章节标题，页眉等汉字不显示的问题
+morekeywords={cp,xz,tar},
+literate={\$}{{\textcolor{red}{\$}}}1
+         {:}{{\textcolor{gray}{:}}}1
+         {hjy@jy}{{\textcolor{orange}{hjy@jy}}}6
+         {sudo}{{\textcolor{red}{sudo}}}4,
+}
+%========================================================================
+
+\begin{document}
+
+\begin{CJK*}{UTF8}{gkai}
+%============================++题目和作者++================================
+\title{JAVA开发应用学习笔记}					   					% 题目
+\author{郝俊禹\thanks{Email:haojunyu2012@gmail.com}}				% 作者
+%============================++++++++++++=================================
+\date{}                                             				% 显示作者,不显示日期
+\maketitle                                          				% 生成标题
+\tableofcontents 												% 生成目录
+\clearpage
+
+%\input{JSP}
+\input{STRUTS2}
+
+
+\clearpage     
+\end{CJK*}
+\end{document}

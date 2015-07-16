@@ -1,0 +1,40 @@
+%
+\newpage
+\pagestyle{fancy} 
+\lhead{}
+\chead{\small{符号}}
+\rhead{}
+
+大写加粗的字母代表矩阵，比如说$\mathbf{X}$。默认情况下，向量都是指列向量，并且用小写的粗斜体表示。比如$\mathbf{X}=[\boldsymbol{x_{1}},\boldsymbol{x_{2}},\cdots,\boldsymbol{x_{m}}]$是一个包含$m$个列向量$\boldsymbol{x_{i}},i=1,\cdots,m$
+的矩阵$\mathbf{X}$。向量$\boldsymbol{x_{j}}$的第$i$个元素表示为$[\boldsymbol{x_{j}}]_i$。对于没有下标的向量$\boldsymbol{x}$也是表示列向量$\boldsymbol{x}=[x_1,\cdots,x_n]^T$。对于矩阵$\mathbf{X}$第$i$行第$j$列的元素可以表示为$[\mathbf{X}]_{i,j}$。文中所有符号见下表\ref{notation}。
+
+
+
+\begin{table}[!htp]
+\caption{符号定义表}
+\label{notation}
+\center
+\begin{tabular}{C{2.5cm}L{7.5cm}}
+\hline
+符号 				& 	含义		\\ 
+\hline
+$\mathbb{N}$			&	自然数集和\\
+$\mathbb{R}$ 		&	实数集合 	\\
+$\mathcal{X}$ 		&  	输入空间 	\\
+$\mathcal{Y}$ 		&	输出空间	\\
+$\mathcal{D}$ 		&	对输入空间进行判定后获得的集合	\\
+$\mathcal{H}	$		&	特征空间 	\\
+$f$					&	判定函数$f:\mathcal{X}\rightarrow\mathcal{D}$ 	\\
+$q$					&	分类原则$q:\mathcal{X}\rightarrow\mathcal{Y}$	\\
+$\langle\boldsymbol{x},\boldsymbol{x'}\rangle$	&	$\boldsymbol{x}$和$\boldsymbol{x'}$的点乘	\\
+$k(\boldsymbol{x},\boldsymbol{x'})$	&	核函数	\\
+$\boldsymbol{\mu}$	&	均值向量	\\
+$\mathbf{S}$			&	离散度矩阵$\mathbf{S}=\sum_{i=1}^{m} (\boldsymbol{x_i}-\mu)(\boldsymbol{x_i}-\mu)^T$\\
+$\mathcal{T_X}$		&	未被标记的训练集$\mathcal{T_X}=\{x_1,\cdots,x_m\}$\\
+$\mathcal{T_XY}$		&	标记的训练集$\mathcal{T_XY}=\{(x_1,y_1),\cdots,(x_m,y_m)\}$	\\
+$m$					&	训练样本的数目\\
+$n$					&	输入空间的维度\\
+$\mathbf{E}$			&	单位矩阵\\
+\hline
+\end{tabular}
+\end{table}

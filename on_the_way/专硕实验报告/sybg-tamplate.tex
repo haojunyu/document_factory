@@ -1,0 +1,323 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  LaTeX + CJK 模板，只针对 A4 纸的中文 Paper。
+%%
+%%  Ver 1.01 By rabbitbug @ www.ctex.org
+%%  Ver 1.0 by oLo @ bbs.ustc.edu.cn
+%%
+%%  You can mofify it and distribute it freely:)
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  文章模板：A4 纸，小五字，单列（可根据要求改双列 twocolumn）
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,11pt,onecolumn]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  packages
+%    这部分声明需要用到的包
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{CJK,CJKnumb,CJKulem}         % CJK 中文支持
+\usepackage{fancyhdr}
+\usepackage{amsmath,amsfonts,amssymb,graphicx}    % EPS 图片支持
+\usepackage{subfigure}   % 使用子图形
+\usepackage{indentfirst} % 中文段落首行缩进
+\usepackage{bm}          % 公式中的粗体字符（用命令\boldsymbol）
+%\usepackage{multicol}    % 正文双栏
+\usepackage{indentfirst} % 中文首段缩进
+\usepackage{url}
+\usepackage{caption2}    % 定制标题格式的宏包
+\usepackage{natbib}
+\usepackage{listings}											% 支持代码显示
+\usepackage{color}												% 给文字,表格和图形上色(68种)
+\usepackage{xcolor}												% color包的扩展
+%===========================c语言代码显示设置===============================
+\lstdefinestyle{C}{
+language=[ANSI]c,							% c语言
+basicstyle=\small,							% 小号字体
+numbers=left,								% 代码左边显行号
+keywordstyle=\color{blue},					% 关键字用蓝色显示
+numberstyle={\tiny\color{green}},			% 行号小小号,绿色	
+numbersep=5pt,								% 行号与代码的距离
+commentstyle=\small\color{red},				% 注释颜色和字号
+backgroundcolor=\color[rgb]{0.95,1.0,1.0},	% 设置背景颜色
+showspaces=false,							% 不显示空格
+showtabs=false,								% 不显示\t
+tabsize=4,									% \t的长短
+frame=shadowbox, 							% 添加外框
+framexleftmargin=5mm, 						% 外框左边的页边空白
+rulesepcolor=\color{red!20!green!20!blue!20!},	%设置阴影颜色
+breaklines=true,								% 自动断行
+morekeywords={MYSQL,MYSQL_RES,MYSQL_ROW},
+escapeinside=``,
+extendedchars=false 							% 解决代码跨页时，章节标题，页眉等汉字不显示的问题
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  lengths
+%    下面的命令重定义页面边距，使其符合中文刊物习惯。
+%  勿随意修改！！！
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addtolength{\topmargin}{-54pt}
+\setlength{\oddsidemargin}{-0.9cm}  % 3.17cm - 1 inch
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\textwidth}{17.00cm}
+\setlength{\textheight}{24.00cm}    % 24.62
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  定义标题格式，包括title，author，affiliation，email等。
+%  在任何用到中文的地方，用\begin{CJK} ... \end{CJK}将其括起来。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\baselinestretch}{1.1} %定义行间距
+\parindent 22pt %重新定义缩进长度
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 标题，作者，通信地址定义
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{CJK}{GBK}{song}
+\title{\huge{实验报告标题}}
+% 第一行：作者[楷体，小五号]
+\author{\small\CJKfamily{kai}{张琴}\\[2pt]
+% 第二行：学院[楷体，小五号]
+\small\CJKfamily{kai}{苏州大学计算机科学与技术学院}\\[2pt]
+% 第三行：Email[Times New Rome，小五号]
+\small Email:
+\url{20124527022@suda.edu.cn}}
+\date{}  % 这一行用来去掉默认的日期显示
+\end{CJK}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 正文两栏环境不允许float环境，比如 figure, table。所以重新定义
+% figure，使之可以浮动到你想要的位置。table也同样，把figure改为
+% table就可以。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{figurehere}
+  {\def\@captype{figure}}
+  {}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  文章正文
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{CJK*}{GBK}{song}
+\CJKcaption{GB}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  自定义命令
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 此行使文献引用以上标形式显示
+\newcommand{\supercite}[1]{\textsuperscript{\cite{#1}}}
+\newtheorem{theorem}{定义} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 此行使section中的图、表、公式编号以A-B的形式显示
+\renewcommand{\thetable}{\arabic{section}-\arabic{table}}
+\renewcommand{\thefigure}{\arabic{section}-\arabic{figure}}
+\renewcommand{\theequation}{\arabic{section}-\arabic{equation}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 此行使图注、表注与编号之间的分隔符缺省
+\renewcommand{\captionlabeldelim}{~}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  显示title，并设页码为空
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  调整单倍行距
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\linespread{1.3}\selectfont
+\vspace{-.8cm}
+\begin{center}
+\parbox{\textwidth}{
+\CJKfamily{song}{\bf
+摘要：}skyline查询是近年来数据库领域的一个研究重点和热点，这主要是因为skyline查询在许多领域有着广泛的应用，现有的工作大部分集中于单处理机环境，然而，由于skyline查询时CPU敏感，在实际的应用中，现有的方法具有很大局限性。基于此，在本文中我们使用了openmp对skyline实现算法的并行，有效提高并行处理skyline查询的效率。实验结果表明，该算法具有有效性和实用性。\\[8pt]
+\CJKfamily{song}{\bf 关键词：}并行算法，openmp，skyline}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  正文由此开始－－－－－－－－－－－－－－－－－－－－－－－－－
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  恢复正文页边距
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\oddsidemargin}{-.5cm}  % 3.17cm - 1 inch
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\textwidth}{17.00cm}
+\CJKfamily{song}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  分栏开始
+%\begin{multicols}{2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{问题描述}\label{sec:sec1}
+近年来，由于skyline算法在多目标决策支持系统、数据库系统、导航系统、数据挖掘等领域的广泛应用，已逐渐成为研究热点。当前，由于功耗、散热等问题，单核CPU性能的提升已到达极限，直接影响到串行算法的执行效率，面对日益增多的数据，为保证skyline计算的高效性，并行计算就成为自然的选择。
+
+
+\subsection{关于openmp}
+openmp是一种面向共享内存以及分布式共享内存的多处理器多线程并行编程语言，是一种能够被用于显式制导多线程、共享内存并行的应用程序编程接口，其具有良好的可移植性，支持多种编程语言。
+
+
+openmp的执行模型采用fork-join的形式,如下图\ref{figs:fig1}：
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.45\textwidth]{fig/fig1.png}\\
+  \caption{openmp执行模型} 
+  \label{figs:fig1}
+\end{figure}
+
+编写openmp程序的必要步骤有以下六点：
+\begin{enumerate}
+\item 生成项目；
+\item 配置项目，使之支持openmp；
+\item 编写代码，加入#include“omp.h”；
+\item 编写源程序；
+\item 配置环境变量，确定线程的数目；
+\item 执行程序。
+\end{enumerate}
+
+
+\subsection{关于skyline}
+skyline查询问题也称为Pareto最优或极大向量问题，它是指从给定的一个N-维空间的对象集合S中选择一个子集，该子集中的点都不能被S中的任意一个其他点所控制，满足这个条件的点称为SP(skyline point)。这里的控制关系是指给定一个N-维空间中的多个对象（对象集S），若存在这样两个对象$ P=\lbrace{}p_{1},p_{2}\cdots,p_{n}\rbrace{} $和$ Q=\lbrace{}q_{1},q_{2}\cdots,q_{n}\rbrace{} $,对象P在所有维上的属性值都不比对象Q差，且至少在一维上的属性值优于对象Q，则称P控制Q。
+
+\subsubsection{skyline}
+给定一个d维空间上的数据集$D=\lbrace{}p_{1},p_{2}\cdots,p_{n}\rbrace{},\vert{}D\vert{}=n,p_{i}(i=1,2,\cdots,n)$为D中的元组，$p_{i}[k](k\in[1,d])$表示第i个元组第k维的值，符号“$\lhd$”的含义为“不差于”。“$\lhd$”的含义为“好于”。
+\begin{theorem}
+支配。假定$p_{i},p_{j}\in{}D$,当且仅当$\forall{}k\in[1,d],p_{i}[k]\lhd{}p_{j}[k]\wedge{}\exists{}t\in{}[1,d]$.$p_{i}[t]\in{}p_{j}[t]$时，$p_{i}$支配$p_{j}$，记作$p_{i}\prec{}p_{j}$。
+\end{theorem}
+当上述条件不满足时，称$p_{i}$不支配$p_{j}$，记作$p_{i}\nprec{}p_{j}$。若$p_{i}\nprec{}p_{j}\wedge{}p_{j}\nprec{}p_{i}$
+，则称$p_{i}$和$p_{j}$互不支配，记作$p_{i}\prec{}\succ{}p_{j}$。
+\begin{theorem}
+skyline集合。D的skyline集合记作$S_{ky}(D)$，由D中不被支配的元组构成，即$S_{ky}(D)=\lbrace{}p_{i}\in{}D\vert{}p_{i}\prec{}p_{j},p_{i}\in{}D\rbrace{}$
+\end{theorem}
+\begin{description}
+\item[性质 1] 传递性。设p_{i},p_{j},p_{k}\in{}D，若$p_{i}\prec{}p_{j}\wedge{}p_{j}\prec{}p_{r}$,则有$p_{i}\prec{}p_{r}$。
+\item[性质 2] 分配性。设$D_{1}$和$D_{2}$为2个数据集，则$S_{ky}(D_{1}\cup{}D_{2})=S_{ky}(D_{1})\cup{}S_{ky}(D_{2})$。\\
+性质2说明：要计算$S_{ky}(D_{1}\cup{}D_{2})$,可以先分别计算$S_{ky}(D_{1})$和$S_{ky}(D_{2})$，然后对其进行合并。
+\end{description}
+
+
+\section{skyline串行算法}\label{sec:sec2}
+skyline查询时选择数据集中不被其他数据所支配的数据，求解skyline结果的算法有D&C，BNL算法，BNL算法是对待测元组建立临时表T，T由一个个的临时表$T_{i}$组成，要读取的第1组输入放在临时表$T_{0}$中，然后再主存中维持一个窗口队列，以收集相互间不存在控制关系的skyline元组，窗口队列初始化为空。算法开始时，第一个读取的元组自然地被放进窗口队列中，然后，每当从当前临时表队列$T_{i}$中读入一个元组p时，就用该元组和窗口队列中已有的所有元组一次进行比较。\\
+
+下图\ref{figs:fig2}是测试函数所参照的求解支配关系的对比表，GT即（greater-than），GE即（greater-than-or-equal）
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.45\textwidth]{fig/fig2.png}\\
+  \caption{求解支配关系的对比表} 
+  \label{figs:fig2}
+\end{figure}
+
+\begin{lstlisting}[style=C]
+void dominanceTest(int sub[], int* check, int p, int q)
+{
+	bool GT = false;
+	bool GE = true;
+	for(int i = 0; i < DIM; i++)
+	{
+		if(sub[i] > 0)
+		{
+			GT = true;
+			break;
+		}
+	}
+	for(int i = 0; i < DIM; i++)
+	{
+		if(sub[i] < 0)
+		{
+			GE = false;
+			break;
+		}
+	}
+
+	if( !GT && !GE )	    //right
+		*(check + p) = 0;
+	if( GT && GE )		 //left
+		*(check + q) = 0;
+}
+\end{lstlisting}
+
+
+\section{skyline并行算法}\label{sec:sec3}
+For命令在多个线程间分割并行迭代空间。for循环的每次迭代都是独立的，因此可以并发地执行。利用skyline查询的支配性质，可以得到这样的一个定理：子数据集中的非skyline点肯定不是全局数据集合中的skyline点，只有子数据集中的skyline点才有可能成为全局数据集合的skyline点。于是我们将要查询的数据集N等分，然后让N个处理器分别处理这N个数据集,找出每个子数据集中的skyline,然后由其中一个处理器负责收集其他N-1个处理器查询的结果，然后对各个处理器获得的结果再次进行一次skyline查询求解，获得最后的查询结果。
+
+
+并行部分如下所示：
+\begin{lstlisting}[style=C]
+　　#pragma omp parallel for num_threads(NUM)
+　　	for(int id = 0; id < NUM; id++)
+　　	{
+　　		for(int i = id*EVERYLEN; i < (id+1)*EVERYLEN-1; i++)
+　　		{
+　　			if(check[i] == 0)
+　　				continue;
+　　		
+　　			for(int j = i+1; j < (id+1)*EVERYLEN; j++)
+　　			{
+　　				int sub[DIM] = {0};
+　　				for(int k = 0; k < DIM; k++)
+　　					sub[k] = data[i*DIM+k] - data[j*DIM+k];
+　　				dominanceTest(sub,check,i,j);
+　　				if(check[i] == 0)
+　　					break;
+　　			}
+　　		}
+　　	}
+\end{lstlisting}
+
+\section{实验结果及分析}\label{sec:sec4}
+　　通过以下图表\ref{tabs:tab1}信息我们可以看出openmp对于算法有相当不错的加速效果。分配的线程数分别为2、4、8、16、32，表\ref{figs:fig2:subfig1}清楚的表示了随着分配的线程数增加，算法的计算时间减少，从实验结果中大概可知随着线程数增加一倍，计算时间减少一半，最终趋于稳定；随着线程数的增加，算法的加速比增加，从实验结果中大概可知随着线程数增加一倍，加速比也也相应增加一倍，最终也趋于稳定，不再有大的变化。图\ref{figs:fig2:subfig1}折线统计图和图\ref{figs:fig2:subfig2}柱状表现的更为明显。
+\begin{table}[!htbp]
+  \centering
+  \caption{分配不同线程数所对应的计算时间以及加速比}\label{tabs:tab1}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    线程数 	& 时间/s  	& 加速比  	\\
+    \hline
+    1 	 	& 17.926866 	& 1 			\\
+    \hline
+    2	 	& 10.345988 & 1.73273	\\
+    \hline
+    4	 	& 5.025060 	& 3.56749	\\
+    \hline
+    8	 	& 2.747738	& 6.52423	\\
+    \hline
+    16	 	& 2.322764	& 7.71790	\\
+    \hline
+    32	 	& 2.169450  & 8.26332	\\
+    \hline
+  \end{tabular}
+\end{table}
+
+
+\begin{figure}[!htbp]
+  \begin{minipage}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/fig3.png}
+    \caption{分配不同线程数计算时间的折线统计图 \label{figs:fig3:subfig1}}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[width=\textwidth]{fig/fig4.png}
+    \caption{分配不同线程数所产生的加速比柱状图 \label{figs:fig3:subfig2}}
+  \end{minipage}
+\end{figure}
+
+
+\section{总结}\label{sec:sec5}
+为了使openmp程序得到优化，我们通常应注意如下问题：
+\begin{enumerate}
+\item 负载均衡--要非常注意使得线程之间的负载大致均衡，能够让多个线程在大致相同的时间内完成工作，从而能够提高程序运行的效率。
+\item 局部性--在编写程序的时候，可以考虑到高速缓存的作用，有意地运用这种局部性带来高速缓存的效率提高。
+\item 线程同步带来的开销--在使用多线程进行开发时需要考虑同步的必要性，消除不必要的同步，或者调整同步的顺序，就有可能带来性能上的提升。
+\end{enumerate}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  参考文献
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliographystyle{unsrt}
+\bibliography{bib/pdac}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  分栏结束
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\end{multicols}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  文章结束
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\end{CJK*}
+\end{document}

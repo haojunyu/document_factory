@@ -1,0 +1,37 @@
+%knowledges
+\section{知识点总结}
+\subsection{复杂度}
+复杂度比较常见的函数复杂度比较：
+\begin{equation}
+c < \log n < n < n\log n < n^d < a^n < n!	\nonumber
+\end{equation}
+递归算法的时间复杂的情况有点复杂，其主定理由该公式计算：
+\begin{equation}
+T(n) = aT(\frac{n}{b}) + f(n)  	\nonumber
+\end{equation}
+a,b都是常数，n是规模变量，一般$f(n)=\mathcal{O}(n^d)$，d也是常数。
+经过推理\ref{recursion}，可得一下结论：
+\begin{itemize}
+\item 若$d < \log_b^a$，$T(n)=\mathcal{O}(n^d)$
+\item 若$d = \log_b^a$，$T(n)=\mathcal{O}(n^d\log n)$
+\item 若$d > \log_b^a$，$T(n)=\mathcal{O}(n^{\log_b^a})$
+\end{itemize}
+附粗糙推理过程：
+假定$b^t=n$,即$t=\log_b^n$。
+\begin{eqnarray}
+\label{recursion}
+T(n) &=& aT(\frac{n}{b}) + f(n)  	\\
+&=& a^2T(\frac{n}{b^2}) + af(\frac{n}{b}) + f(n) \\
+&=& a^tT(1) + \sum_{i=0}^{t-1} a^i b^{(t-i)*d} \\
+&=& a^tT(1) + \frac{b^d}{b^d-a}(b^{dt}-a^t) \\
+&=& [T(1)-\frac{b^d}{b^d-a}] n^{\log_b^a} + \frac{b^d}{b^d-a}n^d
+\end{eqnarray}
+\begin{itemize}
+\item 若$d < \log_b^a$，则等式5$=\mathcal{O}(n^d)$。
+\item 若$d = \log_b^a$，则等式3$=a^t(t+T(1))=n^{\log_b^a}(\log_b^n+T(1))=\mathcal{O}(n^d\log n)$。
+\item 若$d > \log_b^a$，则等式5$=\mathcal{O}(n^{\log_b^a})$。
+\end{itemize}
+
+
+
+

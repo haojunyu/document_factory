@@ -1,0 +1,234 @@
+%mysql
+\section{mysql的使用心得}
+\subsection{mysql命令}
+\subsubsection{用户管理}
+\begin{description}
+\item[启动服务]	service mysql start(ubuntu) 
+\item[登录]	mysql -u $username$ -p$password$
+\item[退出]	exit	
+\item[创建用户]	insert into mysql.user(Host,User,Password) values("$localhost$","$username$","password($password$)")
+\item[给用户授予数据库的全部权限]	grant all privileges on $dbname$.$*$ to $username$@$localhost$ identified by '$password$' 
+\item[给用户授予数据库的部分权限]	grant insert,delete,update,select on $dbname$.$tablename$ to $username$@$localhost$ identified by '$password$' 
+\item[刷新系统权限表]	flush privileges
+\item[删除用户]	delete * from mysql.user where User="$username$" and Host="$localhost$"
+\item[修改用户密码]	update mysql.user set password=password("$password$") where User="$username$" and Host="$localhost$"
+\end{description}
+
+
+\subsubsection{数据库管理}
+\begin{description}
+\item[备份数据库]		mysqldump -u $username$ -p$password$ $dbname$ [$tablename$] $>$ $C:\setminus{}file.sql$
+\item[导入数据库]		mysql -u $username$ -p$password$ $dbname$ $<$ $C:\setminus{}file.sql$
+\item[执行sql脚本]	source $createdb.sql$
+\end{description}
+
+
+\subsubsection{操作数据库}
+\begin{itemize}
+\item 增
+\begin{description}
+\item[建立数据库]	create database $dbname$;	
+\item[建立表]		create table if not exists $tablename$(userId INT, userName VARCHAR(50));
+\item[复制表]		create table $tablename2$ select * from $tablename1$ where 1 <> 1 
+\item[创建(唯一)索引]	create [unique] index $idxId$ on $tablename$($colname$)
+\end{description}
+
+\item 删
+\begin{description}
+\item[数据库]		drop database $dbname$
+\item[数据库中的表]	drop table $tablename$
+\item[清空表中记录]	delete from $tablename$
+\item[删除索引]		drop index $idxId$ on $tablename$
+\end{description}
+
+\item 改
+\begin{description}
+\item[修改(增加)多个字段]	alter $tablename$ add column $fieldname1$ $datetype1$,add column $fieldname2$ $datatype2$
+\item[修改字段类型]	alter table $tablename$ modify $colname$ $coltype$
+\item[修改字段名称以及类型]		alter tabel $tablename$ change $colname$ $newcolname$ $datatype$
+\item[更行表中记录]	update $tablename$ set $userName$=$'hjy'$ where $userId$=$'0005'$
+\end{description}
+
+\item 查
+\begin{description}
+\item[显示数据库]		show databases
+\item[使用数据库]		use $dbname$
+\item[显示表格]		show tables
+\item[显示表格列的属性]	show columns from $tablename$
+\item[查询时间]	select now()
+\item[查询当前用户]	select user()
+\item[查询数据库版本]	select version()
+\item[查询当前使用的数据库]	select database()
+\end{description}
+\end{itemize}
+
+
+\subsubsection{内置函数}
+\begin{description}
+\item[合并字段显示]	select concat($userId,':',userName,"="$) from $tablename$
+\item[选择10-20行]	select * from $tablename$ order by $colname$ limit $9$,$10$
+\end{description}
+
+
+
+\subsection{C访问和操作mysql}
+\subsubsection{准备(ubuntu)}
+\begin{itemize}
+\item 安装mysql-server
+\begin{lstlisting}[style=BASH]
+hjy@jy:~$ sudo apt-get install mysql-server-5.5
+\end{lstlisting}
+
+\item 安装用于连接到数据库和执行数据库查询的库文件mysqlclient.
+\begin{lstlisting}[style=BASH]
+hjy@jy:~$ sudo apt-get install libmysqlclient-dev
+\end{lstlisting}
+安装成功后,相关文件如下:
+\begin{description}
+\item[头文件(mysql.h)] 位于/usr/include/mysql目录下;
+\item[库文件(libmysqlclient.so)] 位于/usr/lib/mysql和/usr/lib目录下
+\end{description}
+\end{itemize}
+
+
+\subsubsection{操作数据库}
+\begin{itemize}
+\item 控制类函数
+\begin{description}
+\item[mysql\_{}init]	初始化MYSQL对象
+\item[mysql\_{}options]	设置连接选项
+\item[mysql\_{}real\_{}connect]	连接到mysql数据库
+\item[mysql\_{}real\_{}escape\_{}string]	将查询串合法化
+\item[mysql\_{}query]	发出一个以空字符结束的查询串
+\item[mysql\_{}real\_{}query]	发出一个查询串
+\item[mysql\_{}store\_{}result]	一次性传送结果
+\item[mysql\_{}use\_{}result]	逐行传送结果
+\item[mysql\_{}free\_{}result]	释放结果集
+\item[mysql\_{}change\_{}user]	改变用户
+\item[mysql\_{}select\_{}db]	改变默认数据库
+\item[mysql\_{}debug]	送出调试信息
+\item[mysql\_{}dump\_{}debug\_{}info]	转储调试信息
+\item[mysql\_{}ping]	测试数据库是否处于活动状态
+\item[mysql\_{}shutdown]	请求数据库SHUTDOWN
+\item[mysql\_{}close]	关闭数据库连接	
+\end{description}
+
+\item 信息获取类函数
+\begin{description}
+\item[mysql\_{}character\_{}set\_{}name]	获取默认字符集
+\item[mysql\_{}get\_{}client\_{}info]	获取客户端信息
+\item[mysql\_{}host\_{}info]	获取主机信息
+\item[mysql\_{}get\_{}proto\_{}info]	获取协议信息
+\item[mysql\_{}get\_{}server\_{}info]	获取服务器信息
+\item[mysql\_{}info]	获取部分查询语句的附加信息
+\item[mysql\_{}stat]	获取数据库状态
+\item[mysql\_{}list\_{}dbs]	获取数据库列表
+\item[mysql\_{}list\_{}tables]	获取数据表列表
+\item[mysql\_{}list\_{}fields]	获取字段列表
+\end{description}
+
+\item 行类类操作函数
+\begin{description}
+\item[mysql\_{}field\_{}count]	获取字段数
+\item[mysql\_{}affected\_{}rows] 获取受影响的行数
+\item[mysql\_{}insert\_{}id]	获取AUTO\_{}INCREMENT列的ID值
+\item[mysql\_{}num\_{}fields]	获取结果集中的字段数
+\item[mysql\_{}field\_{}tell]	获取当前字段位置
+\item[mysql\_{}field\_{}seek]	定位字段
+\item[mysql\_{}fetch\_{}field]	获取当前字段
+\item[mysql\_{}fetch\_{}field\_{}direct]	获取指定字段
+\item[mysql\_{}fetch\_{}fields]	获取所有字段的数组
+\item[mysql\_{}num\_{}rows]	获取行数
+\item[mysql\_{}fetch\_{}length]	获取行长度
+\item[mysql\_{}row\_{}tell]	获取当前行位置
+\item[mysql\_{}row\_{}seek]	行定位
+\item[mysql\_{}data\_{}seek]	行定位
+\item[mysql\_{}fetch\_{}row]	获取当前行
+\end{description}
+
+\item 线程类操作函数
+\begin{description}
+\item[mysql\_{}list\_{}processes]	返回所有线程列表
+\item[mysql\_{}thread\_{}id]	返回当前线程ID
+\item[mysql\_{}thread\_{}safe]	是否支持线程方式
+\item[mysql\_{}kill]	杀死一个线程
+\end{description}
+
+\item 出错处理类函数
+\begin{description}
+\item[mysql\_{}errno]	获取错误号
+\item[mysql\_{}error]	获取错误信息
+\end{description}
+
+\item c程序样例
+\begin{lstlisting}[style=C]
+#include <stdio.h>
+#include <string.h>
+#include <mysql.h>
+
+int main()
+{
+	MYSQL mysql;
+	MYSQL_RES *res;
+	MYSQL_ROW row;
+	char sql[50];
+	int t;
+	
+	sprintf(sql,"select * from USER"); 	// 定义执行的SQL语句
+	mysql_init(&mysql); 				//初始化mysql结构
+	if(!mysql_real_connect(&mysql,"localhost","virtual_desktop","virtual_desktop","virtual_desktop",3306,NULL,0))
+		printf("\n数据库连接发生错误:%s\n",mysql_error(&mysql));
+	else
+		printf("\n数据库连接成功!\n");
+		
+	t = mysql_real_query(&mysql, sql, (unsigned int)strlen(sql));
+								//在服务器上执行定义的SQL语句
+	if(t)
+		printf("查询语句错误: %s\n",mysql_error(&mysql));
+	else
+	{
+		res = mysql_store_result(&mysql);
+		while(row = mysql_fetch_row(res))
+		{
+			for(t = 0; t < mysql_num_fields(res); t++)
+			printf("%s",row[t]);
+			printf("\n");
+		}
+	}
+	printf("释放结果集的空间...\n");
+	mysql_free_result(res);
+	
+	mysql_close(&mysql); 				//释放数据库
+	printf("sql errror! %s\n",mysql_error(&mysql));
+	
+	return 0;
+}
+\end{lstlisting}
+\end{itemize}
+
+
+\subsubsection{编译\&{}连接}
+\begin{itemize}
+\item 编译
+\begin{lstlisting}[style=BASH]
+hjy@jy:~$ gcc -c mysql.c -I /usr/include/mysql
+\end{lstlisting}
+-I 指定头文件目录
+
+\item 连接
+\begin{lstlisting}[style=BASH]
+hjy@jy:~$ gcc mysql.o -o main -L /usr/lib -lmysqlclient
+\end{lstlisting}
+-L 指定库文件路径\\
+-lmysqlclient libmysqlclient.so库文件
+
+\textbf{\underline{库文件类型简介}}
+\begin{description}
+\item[.o]	编译的目标文件
+\item[.a]	静态库,其实就是把若干.o文件打了个包
+\item[.so]	动态链接库(共享库)
+\item[.lo]	使用libtool编译出来的目标文件,其实就是在.o文件中添加了一些信息
+\item[.la]	使用libtool编译出来的库文件,其实就是个文本文件,记录同名动态库和静态库的相关信息
+\end{description}
+
+\end{itemize}

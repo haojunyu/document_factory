@@ -1,0 +1,221 @@
+%summary
+\section{做题总结}
+\subsection{输入输出}
+我们平时编程输入输出都是在一个黑框框里面完成的,这样带来的麻烦是每次调试时都得手动的输入测试数据,导致效率很低。
+而对于ACM这样追求效率的比赛而言是不能容忍的.这里推荐采用重新定义输入流为文本文件输入的方式,一方面不必在黑框框
+中手动输入,另一方面只要注释掉重定义的这行代码,就可以直接提交,非常方便.
+\begin{lstlisting}[style=C]
+#include<stdio.h>
+
+int main(){
+	freopen("in.txt","r",stdin);			//redirect the input stream
+	//freopen("out.txt","w",stdout);		//redirect the output stream
+	
+	int a,b;
+	while(scanf("%d%d",&a,&b)!=EOF){
+		printf("%d\n",a+b);
+	}
+	return 0;
+}
+\end{lstlisting}
+\underline{\color{purple}注意点}
+\begin{enumerate}
+\item 输入输出要用$scanf$和$printf$,少用$cin$和$cout$.前者效率远高于后者.
+\item in.txt要放在和执行文件(不是.cpp文件)相同的目录.
+\end{enumerate}
+
+\subsection{测评机的状态}
+在平台上提交代码后,测评系统会显示程序的文件大小,运行时间,所需内存,以及\textbf{程序的运行结果}等,下面对运行结果
+作一下说明.\\
+\begin{table}[htbp]
+	\caption{\label{tab:STATUS}评测机状态}
+    	\begin{center}
+        \begin{tabular*}{0.95\textwidth}{@{\extracolsep{\fill}} c c c}
+        \hline
+        Verdict		&	Abbreviation		&		Indication      	\\
+        \hline
+        Accepted		&		 AC			&			通过			\\
+        Presentation Error &  PE			&		答案正确,格式错误	\\
+		Time Limit Exceeded& TLE         &			超时			\\
+		Memory Limit Exceeded&	MLE		&		内存超过限制		\\
+		Wrong Answer	&		 WA			&		答案不对			\\
+		Runtime Error	&	 RE			&		一般是由于越界访问导致的\\
+		Output Limit Exceeded & OLE		&		输出文件超限,一般是因为死循环\\
+		Compile Error	&	 CE			&		编译出错			\\
+		System Error		&	 SE			&		尚未遇到过		\\
+		Validator Error	& 	 VE			&		好像是你意图不轨的意思\\	
+        \hline
+        \end{tabular*}
+    \end{center}
+\end{table}
+
+
+\subsection{编译及调试}
+作为C/C++的集成环境有很多,比如VC++6.0,VS系列等,不过推荐使用codeblocks,因为它是跨平台的,
+wins和linux下都有相应的安装程序,而且从使用方便程度上讲丝毫不弱VC++6.0,VS等.
+至于使用详见本主机$\$HOME/Public/resources/codeblocks$目录下的三个文件.
+\begin{description}
+\item[基本篇]		CodeBlock\_{}ACM.pdf(基本的调试)
+\item[进阶篇] 	CodeBlock中文版使用手册.pdf(常用的操作)
+\item[大成篇]		manual\_{}en\_{}codeblocks.chm(英文帮助文档) 
+\end{description}
+
+
+\subsection{C++头文件及常用函数}
+\subsubsection{iostream}
+数据的输入输出流,常用的函数有:
+\begin{description}
+\item[cin]	输入
+\item[cout]	输出
+\end{description}
+
+
+\subsubsection{cstdio}
+C的输入输出,等价于C中stdio.h,常用的函数有:
+\begin{description}
+\item[scanf]		输入(效率比cin高很多)	
+\begin{lstlisting}[style=C]
+#include<stdio.h>
+
+int main(){
+	int a;
+	scanf("%d",&a);
+	printf("%d",a);	
+	return 0;
+}
+\end{lstlisting}
+\item[printf]	输出(效率比cout高很多)
+\item[freopen]	文件输入输出的重定向
+\end{description}
+
+
+\subsubsection{cstring}
+字符串操作函数,等价于C中string.h,常用的函数有:
+\begin{description}
+\item[strcpy]	字符串拷贝
+\item[strcmp]	字符串比较
+\item[strcat]	字符串连接
+\item[memset]	内存初始化
+\end{description}
+
+
+\subsubsection{string}
+C++中的string类,不能用strcpy等c函数去操作.常用函数有:
+\begin{description}
+\item[func]		none
+\end{description}
+
+
+\subsubsection{bitset}
+标准模板库里的位操作类
+\begin{description}
+\item[func]		none
+\end{description}
+
+
+\subsubsection{STL-vector}
+标准模板库里的向量类
+\begin{description}
+\item[func]		none
+\end{description}
+
+
+\subsubsection{STL-stack}
+标准模板库里的堆栈类
+\begin{description}
+\item[func]		none
+\end{description}
+
+
+\subsubsection{STL-queue}
+标准模板库里的队列类
+\begin{description}
+\item[func]		none
+\end{description}
+
+
+\subsubsection{STL-list}
+标准模板库里的链表类
+\begin{description}
+\item[func]		none
+\end{description}
+
+
+\subsubsection{STL-map}
+标准模板库里的哈希表类
+\begin{description}
+\item[func]		none
+\end{description}
+
+
+\subsubsection{numeric}
+常用数字操作,一般和algorithm搭配使用.
+\begin{description}
+\item[func]		none
+\end{description}
+
+
+\subsubsection{STL-algorithm}
+标准模板库里的各类算法类
+\begin{description}
+\item[swap]		交换
+\item[sort]		排序
+\item[merge]		归并
+\item[max]		最大值
+\item[min]		最小值
+\item[binary\_{}search]	二分查找
+\end{description}
+
+
+\subsubsection{STL-functional}
+标准模板库里的定义运算的函数(代替运算符)
+\begin{description}
+\item[func]		none
+\end{description}
+
+
+\subsubsection{STL-map}
+标准模板库里的哈希表类
+\begin{description}
+\item[func]		none
+\end{description}
+
+\subsection{C\&{}C++的区别}
+\subsubsection{头文件}
+C语言中统一使用$filename.h$格式的头文件,而C++中使用$filename$格式的头文件,如C中
+的$\#include<iostream.h>$,C++中的$\#include<iostream>$.不过C++
+中新定义的方法都是有命名空间的$using namespace std;$.而且C++中兼容C程序,所以C中
+的$\#include<math.h>$在C++中也有对应的重新定义的方法在$\#include<cmath>$中.
+
+\subsubsection{数据类型}
+C语言中没有bool类型,所以要自己重新定义,代码如下:
+\begin{lstlisting}[style=C]
+#define bool int
+#define false 0
+#define true 1
+\end{lstlisting}
+这样就可以C++中统一起来.
+
+\subsubsection{编译}
+C语言中对语法要求比较高,它用gcc命令进行编译,在$int main$的主函数中要在最后添加$return 0;$语句.
+而C++用g++命令进行编译,并不会报出要添加$return 0;$的警告.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage

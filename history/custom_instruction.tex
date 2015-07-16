@@ -1,0 +1,303 @@
+%===============指定文档的类别=====================
+%%article  	排版科技期刊,短报告,程序文档,邀请函等
+%%report		排版多章节的长报告,短片的书籍,博士论文等
+%%book		排版书籍
+%%slides		排版幻灯片.其中使用了较大的sans serif字体,
+%			也可以考虑使用FoilTex来得到相同的效果.
+\documentclass[10pt,a4paper]{article}
+%===============文档包含的宏集=====================
+\usepackage[latin1]{inputenc}						
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+%===============文档的标题及作者===================
+\author{HJY}
+\title{custom instruction}
+%=================文档的正文======================
+\begin{document}
+%------------------------
+\maketitle							%生成标题
+\tableofcontents						%生成目录
+%------------------------
+\section{charactors}
+\subsection{space}
+%将空格和制表符等空白字符视为相同的空白距离
+I can not stop loving     you.
+\newline
+%用\\或\newline来表示回车换行,多个空行和一个空行的作用一样.
+I can not stop loving you.
+%命令\\*				强行断行,还禁止分页
+%命令\newpage		另起一新页
+%\mbox{text}			保证text的内容在统一行[邮编,电话号码,文件名etc
+%句号前的\@			说明这个句号是句子的末尾.
+%命令\frenchspacing	能禁止在句号后插入额外的空间
+%命令\linespread{factor}		行距{比例}
+%命令\setlength{\parindent}{0pt}		设置段落之间的距离为opt
+%命令\indent \noindent		段落首行缩进  首行不缩进
+%命令\hspace{}				设置水平距离
+%命令\vspace{}				设置竖直距离	
+
+\subsection{special charactors}
+%特殊字符如下
+\# \$ \% \^{} \& \_ \{ \} \~{}
+
+
+\subsection{quotation}
+%单引号(左右一样)'
+%双引号(左右一样)''
+''Please press the 'x' key.''
+
+
+\subsection{dash \& hypen}
+%符号-		连字号/减号
+%符号--		短破折号
+%符号---		长破折号
+daughter-in-law, X-rated\\
+pages 13--67\\
+yes---or no? \\
+$0$, $1$ and $-1$
+
+
+\subsection{wave}
+%符号\~			波浪号
+%命令\sim		波浪号(数学符号)
+http://www.rich.edu/\~{}bush \\
+http://www.clever.edu/$\sim$demo
+
+
+\subsection{degree}
+%命令$\,^{circ}\mathrm{C}$	摄氏度
+Its $-30\,^{\circ}\mathrm{C}$,I will soon start to super-conduct.
+
+
+\subsection{ellipsis}
+%命令$\ldots 	省略号
+Not like this ... but like this:\\
+New York, Tokyo, Budapest, \ldots
+
+
+\subsection{reference}
+%\label{marker}    	标识符
+%\ref{marker}		引用
+%\pageref{marker}	排印\laber输入处的页码
+A reference to this subsection
+\label{sec:this} looks like:
+''see section~\ref{sec:this} on
+page~\pageref{sec:this}.''
+
+
+\subsection{footnote}
+%\footnote{text}			位于当前页的页脚位置的脚注	
+Footnotes\footnote{This is
+a footnote.} are often used
+by people using \LaTeX.
+
+
+\subsection{emphasize}
+%命令\underline{text}		用下划线来强调重要的单词
+%命令\emph{text}			用斜体来强调重要单词	
+\emph{If you use
+emphasizing inside a piece
+of emphasized text, then
+\LaTeX{} uses the
+\underline{normal} font for
+emphasizing.}
+
+
+
+\section{Environment}
+\subsection{list}
+%itemize					用于简单的列表
+%enumerate				用于带序号的列表
+%description				用于带描述的列表
+\begin{enumerate}
+\item You can mix the list
+environments to your taste:
+\begin{itemize}
+\item But it might start to
+look silly.
+\item[-] With a dash.
+\end{itemize}
+\item Therefore remember:
+\begin{description}
+\item[Stupid] things will not
+become smart because they are
+in a list.
+\item[Smart] things, though, can be
+presented beautifully in a list.
+\end{description}
+\end{enumerate}
+
+
+\subsection{alignment}
+%flushleft					左对齐
+%flushright					右对齐
+%center						居中
+\begin{flushright}
+This text is right-\\aligned.
+\LaTeX{} is not trying to make
+each line the same length.
+\end{flushright}
+
+
+\subsection{quotation}
+%quote						用于重要的断句和例子的引用
+%quotation					用于超过几段的较长的引用(它对段落进行缩进)
+%verse						用于诗歌,在诗歌中断行很重要
+A typographical rule of thumb
+for the line length is:
+\begin{quote}
+On average, no line should
+be longer than 66 characters.
+\end{quote}
+
+
+\subsection{verbatim}
+%verbatim					将文本直接打印,包括所有的断行和空白
+%\verb|text|					将text原文显示
+\verb|like   this :-) |
+
+
+\subsection{table}
+%tabular						用来排印带有水平和铅直表线的漂亮表格
+%	l r c					左 右 中对齐
+%	p{value}					相应的宽度
+%	|						产生铅直表线
+%	&						跳入下一列
+% 	\\						开始新的一行
+%	hline					插入水平表线
+%	\cline{j-i}				表示表线的起始列和终止列的序号
+%		h					放置说明符-放置在当前页
+%		t					放置说明符-放置在页面顶部
+%		b					放置说明符-放置在页面底部
+%		!					放置说明符-忽略阻止浮动体放置的大部分内部参数
+\begin{tabular}{|r|l|}
+\hline
+7C0 & hexadecimal \\
+3700 & octal \\ \cline{2-2}
+11111000000 & binary \\
+\hline \hline
+1984 & decimal \\
+\hline
+\end{tabular}
+
+\begin{tabular}{c r @{.} l} 
+Pi expression 
+& 
+\multicolumn{2}{c}{Value} \\ 
+\hline 
+$\pi$ 
+& 3&1416 \\ 
+$\pi^{\pi}$ 
+& 36&46 
+\\ 
+$(\pi^{\pi})^{\pi}$ & 80662&7 \\ 
+\end{tabular} 
+
+
+\section{mathematics}
+\subsection{base knowledge}
+%$express$					数学表达式
+\TeX{} is pronounced as
+$\tau\epsilon\chi$.\\[6pt]
+100~m$^{3}$ of water\\[6pt]
+This comes from my $\heartsuit$
+
+\ldots when Einstein introduced his formula
+%没有编号的显示式样
+\begin{displaymath}
+c^{2}=a^{2}+b^{2}
+\end{displaymath}
+
+
+\subsection{function}
+%\sqrt 						平方根
+%\overline \underline		上下划线
+%\overbrace \underlince		上下方水平的大括号
+%\vec  \overrightarrow \overleftarrow 向量
+%\frac						分数
+%\int \sum					积分 求和
+%有编号的显示式样
+\begin{eqnarray}
+e = m \cdot c^2 \; \\
+\sum_{k=1}^{n} I_k = 0 \; \\
+\forall x \in \mathbf{R}:
+\end{eqnarray}
+\begin{equation}
+e = m \cdot c^2 \; \\
+\sum_{k=1}^{n} I_k = 0 \; \\
+\end{equation}
+
+
+\subsection{Lowercase Greek letters}
+$\lambda,\xi,\pi,\mu,\Phi,\Omega$
+
+
+\subsection*{theorem}
+%\newtheorem{name}[counter]{text}				定理name-唯一标识,counter-个数,text-显示的定理名
+\newtheorem{law}{Law}
+\newtheorem{jury}[law]{Jury}
+\begin{law} \label{law:box}
+Don't hide in the witness box
+\end{law}
+\begin{jury}[The Twelve]
+It could be you! So beware and
+see law~\ref{law:box}\end{jury}
+\begin{law}No, No, No\end{law}
+
+
+
+\section{graphy}
+%在文档中添加图片
+\begin{figure}[h]
+\begin{center}
+\includegraphics[angle=90, width=0.5\textwidth]{test}
+\end{center}
+\end{figure}
+
+
+\section{install package}
+\begin{enumerate}
+\item	download package from $CTAN(http://www.ctan.org/)$
+\item	install	--tar files into /usr/share/texmf/tex/latex
+\item   update	--tar files into /usr/share/texmf-texlive/tex/latex(maybe you should backup the original files)
+\item	mark the packages--perform the instruction \underline{texhash} in the terminal.
+\item	log off /log on
+\end{enumerate}
+
+
+\section{My Latex}
+\subsection{my command}
+\newcommand{\txsit}[1]
+{This is the \emph{#1} Short
+Introduction to \LaTeXe}
+% in the document body:
+\begin{itemize}
+\item \txsit{not so}
+\item \txsit{very}
+\end{itemize}
+
+
+\subsection{my environment}
+\newenvironment{king}
+{\rule{1ex}{1ex}%
+\hspace{\stretch{1}}}
+{\hspace{\stretch{1}}%
+\rule{1ex}{1ex}}
+\begin{king}
+My humble subjects \ldots
+\end{king}
+
+
+\section{bibliographystyle}
+%plain 	按字母的顺序排列，比较次序为作者、年度和标题.
+%unsrt	样式同plain，只是按照引用的先后排序.
+%alpha	用作者名首字母+年份后两位作标号，以字母顺序排序.
+%abbrv	类似plain，将月份全拼改为缩写，更显紧凑.
+%ieeetr	国际电气电子工程师协会期刊样式.
+%acm		美国计算机学会期刊样式.
+%siam	美国工业和应用数学学会期刊样式.
+%apalike	美国心理学学会期刊样式.
+shownothing
+\end{document}

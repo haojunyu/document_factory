@@ -1,0 +1,325 @@
+%socket
+\section{socket网络编程}
+\subsection{常见结构体}
+\subsubsection{sockaddr}
+%\lstinputlisting[lastline=4]{main.c}
+\begin{lstlisting}[style=C]
+struct sockaddr {
+	unsigned  short  sa_family;     	//address family="AF_XXX",often use AF_INET
+	char  sa_data[14];  				//14 characters of address.            
+};
+\end{lstlisting}
+sockaddr该结构体用作bind、connect、recvfrom、sendto等函数的参数，指明地址信息。但一般编程中不直接对此数据结构操作，而是使用与sockaddr等价的数据结构sockaddr\_{}in（netinet/in.h）
+
+\subsubsection{sockaddr\_{}in}
+\begin{lstlisting}[style=C]
+struct  sockaddr_in {
+	short  int  sin_family; 				/* Address family */
+	unsigned  short  int  sin_port; 		/* Port number */
+	struct  in_addr  sin_addr;			/* Internet address ［htons(INADDR_ANY)］*/
+	unsigned  char  sin_zero[8]; 		/* Same size as struct sockaddr(16 byte) */
+};
+\end{lstlisting}
+\begin{lstlisting}[style=C]
+struct  in_addr {
+	unsigned  long  s_addr;				/* address in network byte order */
+};
+\end{lstlisting}
+填值的时候使用sockaddr\_{}in结构，而作为函数的参数传入的时候转换成sockaddr结构就行了，毕竟都是16个字符长。
+
+
+\subsection{主要函数}
+\subsubsection{socket}
+\begin{lstlisting}[style=C]
+#include<sys/types.h>
+#include<sys/socket.h>
+int socket(int domain,int type,int protocol);
+\end{lstlisting}
+\begin{description}
+\item[功能]	使用前创建一个新的套接字
+\item[参数]		 
+\begin{description}
+\item[domain] 域名，一般设置为“AF\_{}INET”(ipv4)
+\item[type]	套接口类型，一般为SOCK\_{}STREAM(tcp)或SOCK\_{}DGRAM(udp)
+\item[protocol]	协议，一般设置为0
+\end{description}
+\item[返回值]		返回一个套接口描述符,如果出错,则返回­1。
+\end{description}
+
+\subsubsection{bind}
+\begin{lstlisting}[style=C]
+#include<sys/types.h>
+#include<sys/socket.h>
+int bind(int sockfd,struct sockaddr* my_addr,int addrlen);
+\end{lstlisting}
+\begin{description}
+\item[功能]	把套接口绑定到本地计算机的某一个端口上。但如果你只想使用
+connect()则无此必要。
+\item[参数]		 
+\begin{description}
+\item[sockfd] 	由socket()调用返回的套接口文件描述符
+\item[my\_{}addr]	指向数据结构sockaddr的指针，sockaddr中包括了关于你的地址、端口和IP地址的信息。
+\item[addrlen]	地址长度，一般设置为sizeof(structsockaddr)。
+\end{description}
+\item[返回值]		没有错误,就返回0,否则返回-1
+\end{description}
+
+\subsubsection{connect}
+\begin{lstlisting}[style=C]
+#include<sys/types.h>
+#include<sys/socket.h>
+int connect(int sockfd,struct sockaddr* serv_addr,int addrlen);
+\end{lstlisting}
+\begin{description}
+\item[功能]	完成面向连接的协议的连接过程。在建立连接的时候总会有一方先发送数据，
+那么谁调用了connect谁就是先发送数据的一方。
+\item[参数]		 
+\begin{description}
+\item[sockfd]	由socket()调用返回的套接口文件描述符
+\item[serv\_{}addr]	指向数据结构sockaddr的指针，sockaddr中包括了关于你的地址、端口和IP地址的信息。
+\item[addrlen]	地址长度，一般设置为sizeof(structsockaddr)。
+\end{description}
+\item[返回值]		没有错误,就返回0,否则返回SOCKET\_{}ERROR（-1）
+\end{description}
+
+
+\subsubsection{listen}
+\begin{lstlisting}[style=C]
+#include<sys/types.h>
+#include<sys/socket.h>
+int listen(int sockfd,int backlog);
+\end{lstlisting}
+\begin{description}
+\item[功能]	用于面向连接服务器,表明它愿意接收连接.一般先调用listen(),然后再调用accept()。
+\item[参数]		 
+\begin{description}
+\item[sockfd]	由socket()调用返回的套接口文件描述符
+\item[backlog]	进入队列中允许的连接的个数。进入的连接请求在使用系统调用
+accept()应答之前要在进入队列中等待。这个值是队列中最多可以拥有的请求的
+个数。大多数系统的缺省设置为20。你可以设置为5或者10。
+\end{description}
+\item[返回值]		没有错误,就返回0,否则返回SOCKET\_{}ERROR（-1）
+\end{description}
+
+
+\subsubsection{accept}
+\begin{lstlisting}[style=C]
+#include<sys/socket.h>
+int accept(int sockfd,void* addr,int* addrlen);
+\end{lstlisting}
+\begin{description}
+\item[功能]	客户端用connect()连接，服务端用listen()监听端口。但此连接将会在队列中等待,直到服务端使用accept()处理
+它。调用accept()之后,将会返回一个全新的套接口文件描述符来处理这个单个的连接。
+\item[参数]		 
+\begin{description}
+\item[sockfd]	由socket()调用返回的套接口文件描述符
+\item[addr]		addr是指向本地的数据结构sockaddr\_{}in的指针,客户端的信息存储在其中
+\item[addrlen]	地址长度，一般为sizeof(structsockaddr)。
+\end{description}
+\item[返回值]		没有错误,就返回一个全新的套接口文件描述符，否则返回-1。
+\end{description}
+
+
+\subsubsection{send[tcp]}
+\begin{lstlisting}[style=C]
+#include<sys/socket.h>
+int send(int sockfd,const void* msg,int len,int flags);
+\end{lstlisting}
+\begin{description}
+\item[功能]	客户端发送数据
+\item[参数]		 
+\begin{description}
+\item[sockfd]	由socket()调用返回的套接口文件描述符，可以是通过socket()
+系统调用返回的,也可以是通过accept()系统调用得到的。
+\item[msg]		指向你希望发送的数据的指针。
+\item[len]		数据的字节长度
+\item[flags]		参数标志，一般设置为0。
+\end{description}
+\item[返回值]		返回实际发送的字节数,这可能比你实际想要发送的字节数少。
+如果返回的字节数比要发送的字节数少,你在以后必须发送剩下的数据。当
+send()出错时,将返回­1。
+\end{description}
+
+
+\subsubsection{sendto[udp]}
+\begin{lstlisting}[style=C]
+#include<sys/socket.h>
+ssize_t sendto(int sockfd, void *buf, size_t len, int flags,struct sockaddr *src_addr, socklen_t *addrlen);
+\end{lstlisting}
+\begin{description}
+\item[功能]	客户端发送数据(常用于udp连接)
+\item[参数]		 
+\begin{description}
+\item[sockfd]	标识一个已连接套接口的描述字。
+\item[buff]		接收数据缓冲区。　
+\item[len]		缓冲区长度。　
+\item[flags]		参数标志，一般设置为0。
+\item[src\_{}addr]	指向装有源地址的缓冲区。
+\item[addren]	指向装有源地址的缓冲区。	
+\end{description}
+\item[返回值]		返回实际发送的字节数,这可能比你实际想要发送的字节数少。
+如果返回的字节数比要发送的字节数少,你在以后必须发送剩下的数据。当
+sendto()出错时,将返回­1。
+\end{description}
+
+
+\subsubsection{recv[tcp]}
+\begin{lstlisting}[style=C]
+#include<sys/socket.h>
+int recv(int sockfd,void* buf,int len,unsigned int flags);
+\end{lstlisting}
+\begin{description}
+\item[功能]	服务端接受数据(常用于tcp连接)
+\item[参数]		 
+\begin{description}
+\item[sockfd]	由socket()调用返回的套接口文件描述符，可以是通过socket()
+系统调用返回的,也可以是通过accept()系统调用得到的。
+\item[msg]		指向你希望发送的数据的指针。
+\item[len]		缓冲区的最大长度
+\item[flags]		参数标志，一般设置为0。
+\end{description}
+\item[返回值]		返回实际读取到缓冲区的字节数,如果出错则返回­1。
+\end{description}
+
+
+\subsubsection{recvfrom[udp]}
+\begin{lstlisting}[style=C]
+#include<sys/socket.h>
+ssize_t recvfrom(int sockfd, void *buf, size_t len, int flags,struct sockaddr *src_addr, socklen_t *addrlen);
+\end{lstlisting}
+\begin{description}
+\item[功能]	服务端接受数据(常用于udp连接)
+\item[参数]		 
+\begin{description}
+\item[sockfd]	标识一个已连接套接口的描述字。
+\item[buff]		接收数据缓冲区。　
+\item[len]		缓冲区长度。　
+\item[flags]		参数标志，一般设置为0。
+\item[src\_{}addr]	指向装有源地址的缓冲区。
+\item[addren]	指向装有源地址的缓冲区。	
+\end{description}
+\item[返回值]		返回实际读取到缓冲区的字节数,如果出错则返回­1。
+\end{description}
+
+
+\subsubsection{close}
+\begin{lstlisting}[style=C]
+#include<unistd.h>
+int close(int sockfd);
+\end{lstlisting}
+\begin{description}
+\item[功能]	关闭本进程的socketfd，但链接还是开着的，用这个socketfd的其它进程还能用这个链接，能读或写这个socketfd。
+\item[参数]		 
+\begin{description}
+\item[sockfd]	由socket()调用返回的套接口文件描述符，可以是通过socket()
+系统调用返回的,也可以是通过accept()系统调用得到的。
+\end{description}
+\item[返回值]		成功则返回0，错误返回-1。
+\end{description}
+
+
+\subsubsection{shutdown}
+\begin{lstlisting}[style=C]
+#include<sys/socket.h>
+int shutdown(int sockfd,int how);
+\end{lstlisting}
+\begin{description}
+\item[功能]	破坏了socket链接，读的时候可能侦探到EOF结束符，写的时候可能会收到一个SIGPIPE信号，这个信号可能直到
+socket buffer被填充了才收到，shutdown还有一个关闭方式的参数，0-不能再读，1-不能再写，2-读写都不能。
+\item[参数]		 
+\begin{description}
+\item[sockfd]	由socket()调用返回的套接口文件描述符
+\item[how]		
+\begin{description}
+\item[SHUT\_{}RD（0）]	关闭sockfd上的读功能，此选项将不允许sockfd进行读操作。
+\item[SHUT\_{}WR（1）]	关闭sockfd的写功能，此选项将不允许sockfd进行写操作。
+\item[SHUT\_{}RDWR（2）]	关闭sockfd的读写功能。
+\end{description}
+\end{description}
+\item[返回值]		成功则返回0，错误返回-1。
+\end{description}
+
+
+
+在远程的主机可能试图使用connect()连接
+你使用listen()正在监听的端口。但此连接将会在队列中等待,直到使用accept()处理
+它。调用accept()之后,将会返回一个全新的套接口文件描述符来处理这个单个的连接。这样,
+对于同一个连接来说,你就有了两个文件描述符。原先的一个文件描述符正在监听你指定的端
+口,新的文件描述符可以用来调用send()和recv()。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{辅助函数}
+\subsubsection{inet\_{}addr}
+\begin{lstlisting}[style=C]
+	sockaddr_in ina;
+	ina.sin_addr.s_addr = inet_addr("132.241.5.10");
+\end{lstlisting}
+\begin{description}
+\item[功能]	inet\_{}addr函数将IP地址从点数格式转换成无符号长整型，其返回的地址已经是网络字节格式，所以无需再调用函数htonl()。
+\end{description}
+
+
+\subsubsection{inet\_{}ntoa}
+\begin{lstlisting}[style=C]
+	sockaddr_in ina;
+	printf("%s",inet_ntoa(ina.sin_addr));
+\end{lstlisting}
+\begin{description}
+\item[功能]	inet\_ntoa函数将一个in\_{}addr结构体输出成点数格式，ntoa含义是“network to ascii”，它返回的是一个指向一个字符的指针。它是一个由inet\_{}ntoa()控制的静态的固定的指针，所以每次调用inet\_{}ntoa()，它就将覆盖上次调用时所得的IP地址。
+\end{description}
+
+
+\subsubsection{bzero}
+\begin{lstlisting}[style=C]
+#include <strings.h>
+void bzero(void* s,size_t n);
+\end{lstlisting}
+\begin{description}
+\item[功能]	设置s指向的前n个字节的空间里的值为0（包含$\backslash{}0$）。
+\end{description}
+
+
+\subsubsection{htons}
+\begin{lstlisting}[style=C]
+#include <netinet/in.h>
+uint16_t htons(uint16_t hostshort);
+\end{lstlisting}
+\begin{description}
+\item[功能]	将unsigned short整型的主机点数格式的地址转换为ip地址。一般用来转换端口。
+\end{description}
+
+
+\subsubsection{inet\_{}aton}
+\begin{lstlisting}[style=C]
+#include <sys/socket.h>
+#include <netinet/in.h>
+int inet_aton(const char *cp, struct in_addr *inp);
+\end{lstlisting}
+\begin{description}
+\item[功能]	将IP地址从点数格式的形式转换成二进制，并将它存储在inp的结构种。
+\item[返回值]		成功则返回0，地址非法则返回-1。
+\end{description}
+
+
+
+
+
+
+
+

@@ -1,0 +1,189 @@
+
+@inproceedings{1,
+ author = {Kooij S J J, Bejerot S, Blackwell A, et al},
+ title = {European consensus statement on diagnosis and treatment of adult ADHD: The European Network Adult ADHD},
+ note = {BMC psychiatry},
+ year = 2010
+}
+
+@inproceedings{2,
+ author = {Huettel, S A; Song A W; McCarthy, G},
+ title = {Functional Magnetic Resonance Imaging},
+ note = {Massachusetts: Sinauer},
+ year = 2009
+}
+
+
+@inproceedings{3,
+  title={Differentiation between resting-state fMRI data from ADHD and normal subjects: Based on functional connectivity and machine learning},
+  author={Liang, Sheng-Fu and Hsieh, Tsung-Hao and Chen, Pin-Tzu and Wu, Ming-Long and Kung, Chun-Chia and Lin, Chun-Yu and Shaw, Fu-Zen},
+  booktitle={Fuzzy Theory and it's Applications (iFUZZY), 2012 International Conference on},
+  pages={294--298},
+  year={2012},
+  organization={IEEE}
+}
+
+
+@inproceedings{4,
+  title={Discriminative analysis of resting-state brain functional connectivity patterns of Attention-Deficit Hyperactivity Disorder using Kernel Principal Component Analysis},
+  author={Xunheng Wang ; Key Lab. of Child Dev. Learning Sci., Southeast Univ., Nanjing, China ; Yun Jiao ; Zuhong Lu},
+  booktitle={Fuzzy Systems and Knowledge Discovery (FSKD), 2011 Eighth International Conference on},
+  pages={1938 - 1941},
+  year={2011},
+  organization={IEEE}
+}
+
+
+
+
+@misc{5,
+ author = {Milham, M. P.},
+ title = {Open neuroscience solutions for the connectome-wide association
+era},
+ note = {214-218},
+ year = 2012
+}
+
+
+@misc{6,
+ author = {Eloyan, A., Muschelli, J., Nebel, M. B., Liu, H., Han, F., Zhao, T., & Caffo, B.},
+ title = {Automated diagnoses of attention deficit hyperactive disorder using magnetic resonance
+imaging},
+ year = 2012
+}
+
+
+@inproceedings{7,
+  title={Reducing the dimensionality of data with neural networks},
+  author={Hinton G E, Salakhutdinov R R},
+  booktitle={Science},
+  pages={504 - 507},
+  year={2006}
+}
+
+@inproceedings{8,
+  title={A fast learning algorithm for deep belief nets},
+  author={Hinton G E, Osindero S, Teh Y W},
+  booktitle={Neural computation},
+  pages={1527 - 1554},
+  year={2006}
+}
+
+@inproceedings{9,
+  title={Unsupervised feature learning for audio classification using convolutional deep belief networks},
+  author={Lee H, Pham P T, Largman Y, et al.},
+  booktitle={NIPS},
+  pages={1096 - 1104},
+  year={2009}
+}
+
+
+@inproceedings{10,
+  title={Unsupervised learning of hierarchical representations with convolutional deep belief networks},
+  author={Lee H, Grosse R, Ranganath R, et al.},
+  booktitle={Communications of the ACM},
+  pages={95 - 103},
+  year={2011}
+}
+
+
+@inproceedings{11,
+  title={Unsupervised learning of hierarchical representations with convolutional deep belief networks},
+  author={Lee H, Grosse R, Ranganath R, et al.},
+  booktitle={Communications of the ACM},
+  pages={95 - 103},
+  year={2011}
+}
+
+
+@misc{12,
+ author = {Sarikaya R, Hinton G E, Deoras A},
+ title = {Application of Deep Belief Networks for Natural Language Understanding}
+}
+
+
+@inproceedings{13,
+  title={Training products of experts by minimizing contrastive divergence},
+  author={Hinton G E.},
+  booktitle={Neural computation},
+  pages={1771 - 1800},
+  year={2002}
+}
+
+@inproceedings{14,
+  title={Using Bayesian Networks to Analyze Expression Data},
+  author={Friedman, N., M. Linial, I. Nachman, and D. Pe’er},
+  booktitle={Computational Biology},
+  pages={601 - 620},
+  year={2000}
+}
+
+
+@inproceedings{15,
+  title={Modern Information Retrieval},
+  author={Baeze-Yates, R. and B. Ribiero-Neto},
+  booktitle={Addison Wesley Pub Co},
+  year={1999}
+}
+
+@inproceedings{16,
+  title={A comparison of classification algorithms to automatically identify chest X-ray reports that support pneumonia},
+  author={Chapman, Fizman, Chapman and P J Haug},
+  booktitle={Journal of Biomedical Informatics},
+  pages={4 - 14},
+  year={2001}
+}
+
+
+@inproceedings{17,
+  title={A comparison of learning algorithms for Bayesian networks: a case study based on data from an emergency medical service},
+  author={Acid, S L  de Campos, J  Fernandez-Luna, S  Rodriguez, J. Rodriguez, and J Salcedo},
+  booktitle={Artificial Intelligence in Medicine},
+  pages={215–232},
+  year={2004}
+}
+
+
+@inproceedings{18,
+  title={Functional magnetic resonance imaging},
+  author={Huettel S A, Song A W, McCarthy G.},
+  booktitle={Sunderland, MA: Sinauer Associates},
+  year={2004}
+}
+
+
+
+
+
+
+@article{Alpher02,
+author = {A. Alpher},
+title = {Frobnication},
+journal = {Journal of Foo},
+volume = 12, 
+number = 1, 
+pages = {234--778}, 
+year = 2002
+}
+
+@article{Alpher03,
+author = {A. Alpher and  J.~P.~N. Fotheringham-Smythe},
+title = {Frobnication revisited},
+journal = {Journal of Foo},
+volume = 13, 
+number = 1, 
+pages = {234--778}, 
+year = 2003
+}
+
+@article{Alpher04,
+author = {A. Alpher and J.~P.~N. Fotheringham-Smythe and G. Gamow},
+title = {Can a machine frobnicate?},
+journal = {Journal of Foo},
+volume = 14, 
+number = 1, 
+pages = {234--778}, 
+year = 2004
+}
+
+
