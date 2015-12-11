@@ -9,7 +9,7 @@
 \setmainfont{Adobe Fangsong Std}
 \setsansfont{Adobe Kaiti Std}
 
-\hyphenpenalty=10000
+%\hyphenpenalty=10000
 \maketitle
 
 %\section{求职意向}
@@ -36,27 +36,27 @@
 \cvcomputer{语言}{C/C++(熟悉), C\#, Java}
            {Web}{HTML, ASP .Net}  
 \cvcomputer{数据库}{（熟悉）MySQL, SQL Server}
-			{工具}{Matlab, Shell编程,Python}
+			{工具}{Matlab, Shell编程, Python}
 
 \subsection{其他}
-\cvcomputer{博客}{ github }
+\cvcomputer{项目管理}{ github }
            {文字编辑}{\LaTeX{}，VIM}
 
 \section{经历}
 \subsection{项目经历}
-\tlcventry{2010}{2011}{研究生管理系统}{}{}{}{
+\tlcventry{2014}{2015}{基于深度贝叶斯网络的多动症判别分析}{}{}{}{
 \begin{itemize}
- \item 该系统用来帮助导师管理研究生的日常工作和学习情况,目前依旧在苏大运行着.
- \item 采用SOA架构和Web Service技术在.NET平台下开发的一个基于B/S模式的管理系统
- \item 该管理系统的实现加深了我对数据库的应用和理解。
+ \item 该项目是我小论文研究的内容,其应用深度贝叶斯网络对小孩的FMRI图像进行多动症的判别分析.
+ \item 该研究涉及深度学习和贝叶斯网络以及SVM分类.
+ \item 该研究让我将机器学习的方法应用于医学实践,使我对未来的数据分析更加的看好.
 \end{itemize}}
 \vspace{0.5em}
 
-\tlcventry{2012}{2013}{虚拟桌面系统调度服务器软件的设计和实现}{}{}{}{
+\tlcventry{2014}{2015}{基于 Django 的web应用开发}{}{}{}{
 \begin{itemize}
- \item 虚拟桌面系统分为调度服务器,应用服务器和客户端,旨在为云计算提供支持.
- \item 本人负责调度服务器的开发.主要由任务调度,负载均衡和用户管理三个模块构成.
- \item 该软件用c语言编写,采用Socket通信和多线程编程,并运行在Linux环境下.\\该软件目前只是用于实验室试验阶段。
+ \item 该web应用是基于python的Django框架,旨在搭建Nuance公司的训练管理平台.
+ \item 该应用接受员工上传的训练数据集,让服务器进行训练和显示.
+ \item 该应用由python编写,涉及mysql,html等技术.
 \end{itemize}}
 \vspace{0.5em}
 
@@ -68,21 +68,35 @@
 \end{itemize}}
 \vspace{0.5em}
 
-\tlcventry{2014}{2015}{基于 Django 的web应用开发}{}{}{}{
+\tlcventry{2012}{2013}{虚拟桌面系统调度服务器软件的设计和实现}{}{}{}{
 \begin{itemize}
- \item 该web应用是基于python的Django框架,旨在搭建Nuance公司的训练管理平台.
- \item 该应用接受员工上传的训练数据集,让服务器进行训练和显示.
- \item 该应用由python编写,涉及mysql,html等技术.
+ \item 虚拟桌面系统分为调度服务器,应用服务器和客户端,旨在为云计算提供支持.
+ \item 本人负责调度服务器的开发.主要由任务调度,负载均衡和用户管理三个模块构成.
+ \item 该软件用c语言编写,采用Socket通信和多线程编程,并运行在Linux环境下.\\该软件目前只是用于实验室试验阶段。
+\end{itemize}}
+\vspace{0.5em}
+
+\tlcventry{2010}{2011}{研究生管理系统}{}{}{}{
+\begin{itemize}
+ \item 该系统用来帮助导师管理研究生的日常工作和学习情况,目前依旧在苏大运行着.
+ \item 采用SOA架构和Web Service技术在.NET平台下开发的一个基于B/S模式的管理系统
+ \item 该管理系统的实现加深了我对数据库的应用和理解。
 \end{itemize}}
 
-\tlcventry{2014}{0}{基于深度贝叶斯网络的多动症判别分析}{}{}{}{
-\begin{itemize}
- \item 该项目是我小论文研究的内容,其应用深度贝叶斯网络对小孩的FMRI图像进行多动症的判别分析.
- \item 该研究涉及深度学习和贝叶斯网络以及SVM分类.
- \item 该研究让我将机器学习的方法应用于医学实践,使我对未来的数据分析更加的看好.
-\end{itemize}}
 
 \subsection{社会工作}
+\tlcventry{2015}{0}{SAP公司开发运维部门}{}{}{}{
+\begin{itemize}
+ \item ELK系统搭建
+ \item 用户行为以及系统状态分析。
+\end{itemize}}
+
+\tlcventry{2014}{2015}{Nuance公司研发部}{}{}{}{
+\begin{itemize}
+ \item 将ENLU核心库应用到android的app上。
+ \item 基于Django开发任务管理系统。
+\end{itemize}}
+
 \tlcventry{2013}{2014}{同济大学电子与信息学院研究生会学习部部长}{}{}{}{
 \begin{itemize}
  \item 负责策划与组织管理文化节学术讲座、学术沙龙系列活动 
@@ -91,10 +105,9 @@
 
 
 
-\section{个人兴趣}
-
-\cvhobby{运动}{台球，乒乓球，游泳}
-\cvhobby{其他}{旅游，读书，摄影}
+\section{自我评价}
+\cvhobby{学习}{本科阶段参加了不少竞赛并获得了些成绩。其次还做过一个管理系统。而硕士阶段主要精力投入在机器学习方面，熟悉主流的Machine Learning算法，自学能力强，善于总结，喜欢写\href{http://haojunyu.gitcafe.io}{博客}记录自己的感悟。}
+\cvhobby{生活}{喜欢旅游，随手拍照记录日常点滴。此外还喜欢玩游戏和跑步，以此来释压。}
 
 \end{document}
 
